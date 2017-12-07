@@ -9,26 +9,15 @@ php:
   build: .
   volumes:
     - ./:/var/www/html
-  working_dir: /var/www/html/public
+  working_dir: /var/www/html
   command: php-fpm
   links:
-    - db
+    - db:mongo
   ports:
     - "9000:9000"
-  environment:
-    APP_ENV: local
-    APP_DEBUG: 'true'
-    APP_KEY: APP_KEY
-    APP_LOCALE: en
-    APP_FALLBACK_LOCALE: en
-    DB_CONNECTION: mongodb
-    DB_HOST: DB_HOST
-    DB_DATABASE: DB_DATABASE
-    DB_USERNAME: DB_USERNAME
-    DB_PASSWORD: DB_PASSWORD
+  env_file:
+    - .env
 db:
   image: mongo
-  ports:
-    - "27017:27017"
   environment:
     MONGO_DATA_DIR: /data/db
