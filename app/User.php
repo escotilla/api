@@ -8,7 +8,6 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  * Class User
  * @package App
  * @property string name
- * @property string user_id
  * @property string username
  * @property string email
  * @property string password
@@ -23,7 +22,6 @@ class User extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'user_id',
         'email',
         'username',
         'api_token',
@@ -45,7 +43,7 @@ class User extends Eloquent
         $output = [
             'email' => $this->email,
             'api_token' => $this->api_token,
-            'user_id' => $this->user_id
+            'user_id' => $this->_id
         ];
 
         return $output;
