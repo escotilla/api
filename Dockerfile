@@ -19,3 +19,4 @@ RUN composer install --no-interaction
 WORKDIR /var/www/html
 RUN chown -R www-data /var/www/html
 CMD ["service php7.1-fpm restart"]
+EXPOSE 9000
