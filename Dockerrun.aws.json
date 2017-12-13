@@ -10,7 +10,7 @@
     {
       "name": "nginx-proxy-conf",
       "host": {
-        "sourcePath": "/var/app/current/proxy/conf.d"
+        "sourcePath": "/var/www/html/current/proxy/conf.d"
       }
     }
   ],
@@ -18,15 +18,6 @@
     {
       "name": "php",
       "image": "northbank/php-api",
-      "environment": [
-        {
-          "name": "Container",
-          "value": "PHP"
-        }
-      ],
-      "links": [
-        "mongo"
-      ],
       "essential": true,
       "memory": 128,
       "mountPoints": [
@@ -36,18 +27,6 @@
           "readOnly": true
         }
       ]
-    },
-    {
-      "name": "mongo",
-      "image": "mongo",
-      "environment": [
-        {
-          "name": "MONGO_DATA_DIR",
-          "value": "/data/db"
-        }
-      ],
-      "essential": true,
-      "memory": 128
     },
     {
       "name": "nginx-proxy",
