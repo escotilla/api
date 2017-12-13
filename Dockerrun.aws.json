@@ -1,7 +1,84 @@
 {
-  "AWSEBDockerrunVersion": "1",
-  "Logging": "/tmp/flowerpunk",
-  "Image": {
-    "Update": "false"
-  }
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "php",
+      "host": {
+        "sourcePath": "/var/www/html"
+      }
+    },
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/var/app/current/proxy/conf.d"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "php",
+      "image": "northbank/php-api",
+      "environment": [
+        {
+          "name": "Container",
+          "value": "PHP"
+        }
+      ],
+      "links": [
+        "mongo"
+      ],
+      "essential": true,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "php",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "name": "mongo",
+      "image": "mongo",
+      "environment": [
+        {
+          "name": "MONGO_DATA_DIR",
+          "value": "/data/db"
+        }
+      ],
+      "essential": true,
+      "memory": 128
+    },
+    {
+      "name": "nginx-proxy",
+      "image": "nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "php"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "php",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-nginx-proxy",
+          "containerPath": "/var/log/nginx"
+        }
+      ]
+    }
+  ]
 }
