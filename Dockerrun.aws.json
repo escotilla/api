@@ -4,13 +4,13 @@
     {
       "name": "php",
       "host": {
-        "sourcePath": "/var/www/html"
+        "sourcePath": "/var/app/current"
       }
     },
     {
       "name": "nginx-proxy-conf",
       "host": {
-        "sourcePath": "/var/www/html/current/proxy/conf.d"
+        "sourcePath": "/var/app/current/proxy/conf.d"
       }
     }
   ],
