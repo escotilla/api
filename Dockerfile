@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-ADD images/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+ADD images/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 RUN usermod -u 1000 www-data
 

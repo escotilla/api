@@ -10,7 +10,7 @@
     {
       "name": "nginx-proxy-conf",
       "host": {
-        "sourcePath": "/var/app/current/images/nginx/nginx.conf"
+        "sourcePath": "/var/app/current/images/nginx/conf.d"
       }
     }
   ],
