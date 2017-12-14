@@ -16,8 +16,20 @@
   ],
   "containerDefinitions": [
     {
+      "name": "mongo",
+      "image": "mongo",
+      "essential": true,
+      "memory": 128,
+      "environment": [
+        {
+          "name": "MONGO_DATA_DIR",
+          "value": "/data/db"
+        }
+      ],
+    },
+    {
       "name": "php",
-      "image": "php:fpm",
+      "image": "northbank/php-api",
       "essential": true,
       "memory": 128,
       "mountPoints": [
@@ -26,6 +38,9 @@
           "containerPath": "/var/www/html",
           "readOnly": true
         }
+      ],
+      "links": [
+        "mongo"
       ]
     },
     {
@@ -40,7 +55,8 @@
         }
       ],
       "links": [
-        "php"
+        "php",
+        "mongo"
       ],
       "mountPoints": [
         {
