@@ -25,7 +25,7 @@
           "name": "MONGO_DATA_DIR",
           "value": "/data/db"
         }
-      ],
+      ]
     },
     {
       "name": "php",
