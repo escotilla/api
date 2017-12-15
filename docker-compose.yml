@@ -6,7 +6,7 @@ nginx:
   ports:
     - "80:80"
 php:
-  build: .
+  image: northbank/php-api
   volumes:
     - ./:/var/www/html
   working_dir: /var/www/html

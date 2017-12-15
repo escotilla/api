@@ -40,7 +40,7 @@
         }
       ],
       "links": [
-        "mongo"
+        "mongo:mongo"
       ],
       "environment": [
         {
