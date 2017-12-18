@@ -20,6 +20,12 @@
       "image": "mongo",
       "essential": true,
       "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 27017,
+          "containerPort": 27017
+        }
+      ],
       "environment": [
         {
           "name": "MONGO_DATA_DIR",
