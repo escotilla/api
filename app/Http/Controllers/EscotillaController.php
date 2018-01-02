@@ -19,8 +19,7 @@ class EscotillaController extends Controller
                 'success' => false,
                 'message' => $message,
                 'code' => $code
-            ])
-            ->setStatusCode($code);
+            ]);
     }
 
     /**
