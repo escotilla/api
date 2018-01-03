@@ -47,48 +47,6 @@
       ],
       "links": [
         "mongo:mongo"
-      ],
-      "environment": [
-        {
-          "name": "MONGO_DATA_DIR",
-          "value": "/data/db"
-        },
-        {
-          "name": "DB_CONNECTION",
-          "value": "mongodb"
-        },
-        {
-          "name": "DB_HOST",
-          "value": "mongo"
-        },
-        {
-          "name": "DB_PORT",
-          "value": "27017"
-        },
-        {
-          "name": "DB_DATABASE",
-          "value": "Escotilla"
-        },
-        {
-          "name": "DB_USERNAME",
-          "value": "escotilla"
-        },
-        {
-          "name": "DB_PASSWORD",
-          "value": "turkey1234567890"
-        },
-        {
-          "name": "CACHE_DRIVER",
-          "value": "file"
-        },
-        {
-          "name": "QUEUE_DRIVER",
-          "value": "sync"
-        },
-        {
-          "name": "APP_KEY",
-          "value": "q7RfesndPolFjC8ZzV53KZXjYfYVFb3E"
-        }
       ]
     },
     {
