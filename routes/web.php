@@ -15,8 +15,11 @@ $router->get('/', function () use ($router) {
     return 'Escotilla to the Rescue';
 });
 
+$router->get('/question/read', 'QuestionController@read');
 
 $router->group(['middleware' => 'json'], function () use ($router) {
     $router->post('/user/create', 'UserController@create');
     $router->post('/user/login', 'UserController@login');
+    $router->post('/application/create', 'ApplicationController@create');
+    $router->post('/application/read', 'ApplicationController@get');
 });
