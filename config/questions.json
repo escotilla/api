@@ -1,0 +1,47 @@
+[
+    {
+        "question_id": "5a501d0ebfaf57001c265b22",
+        "short_question": "business_description",
+        "english": "Please describe your business",
+        "spanish": "Describe your business por favor",
+        "category": "business",
+        "answer_type": "string",
+        "attribute": null
+    },
+    {
+        "question_id": "5a501d0ebfaf57001c265b23",
+        "short_question": "dob",
+        "english": "What's your date of birth?",
+        "spanish": "DOB?",
+        "category": "personal",
+        "answer_type": "date",
+        "attribute": null
+    },
+    {
+        "question_id": "5a5287a5bfaf57008c058792",
+        "short_question": "business_product",
+        "english": "What product or service do you sell?",
+        "spanish": "What product or service do you sell?",
+        "category": "business",
+        "answer_type": "string",
+        "attribute": null
+    },
+    {
+        "question_id": "5a5287a5bfaf57008c058793",
+        "short_question": "business_name",
+        "english": "Business name",
+        "spanish": "Business name",
+        "category": "business",
+        "answer_type": "string",
+        "attribute": null
+    },
+    {
+        "question_id": "5a54031fbfaf5700a0017672",
+        "short_question": "loan_amount",
+        "english": "Loan amount",
+        "spanish": "Loan amount",
+        "category": "loan",
+        "answer_type": "int",
+        "attribute": null
+    }
+]
