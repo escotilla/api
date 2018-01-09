@@ -2,7 +2,11 @@
 
 namespace App;
 
+use function foo\func;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Jenssegers\Mongodb\Relations\EmbedsMany;
+use Jenssegers\Mongodb\Relations\EmbedsOne;
+use Jenssegers\Mongodb\Relations\HasMany;
 
 /**
  * Class User
@@ -26,7 +30,8 @@ class User extends Eloquent
         'username',
         'api_token',
         'login_attempts',
-        'password'
+        'password',
+        'dob'
     ];
 
     /**
@@ -38,14 +43,39 @@ class User extends Eloquent
         'password',
     ];
 
+    public function applications(): HasMany
+    {
+        return $this->hasMany(Application::class);
+    }
+
+    public function answers(): EmbedsMany
+    {
+        return $this->embedsMany(Answer::class);
+    }
+
+    public function business(): EmbedsOne
+    {
+        return $this->embedsOne(Business::class);
+    }
+
     public function to_auth_output(): array
     {
         $output = [
             'email' => $this->email,
             'api_token' => $this->api_token,
-            'user_id' => $this->_id
+            'user_id' => $this->_id,
+            'application_ids' => $this->applications->map(function($application) {
+                return $application->_id;
+            })
         ];
 
         return $output;
+    }
+
+    public function to_application_output()
+    {
+        return $this->applications->map(function($application) {
+            return $application->to_public_output();
+        });
     }
 }
