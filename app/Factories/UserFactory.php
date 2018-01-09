@@ -2,6 +2,7 @@
 
 namespace App\Factories;
 
+use App\Business;
 use App\User;
 
 class UserFactory
@@ -13,8 +14,10 @@ class UserFactory
         $user->email = $email;
         $user->password = password_hash($password, PASSWORD_BCRYPT);
         $user->api_token = uniqid('', true);
-        $user->user_id = uniqid('u');
         $user->login_attempts = 0;
+
+        $business = new Business();
+        $user->business()->associate($business);
 
         return $user;
     }
