@@ -3,11 +3,13 @@
 namespace App;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Jenssegers\Mongodb\Relations\BelongsTo;
+use Jenssegers\Mongodb\Relations\EmbedsMany;
 
 /**
- * Class User
+ * Class Application
  * @package App
- * @property string application_id
+ * @property string status
  */
 class Application extends Eloquent
 {
@@ -17,13 +19,38 @@ class Application extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'application_id',
+        'amount',
+        'term',
+        'frequency',
+        'amount',
+        'status'
     ];
 
-    public function to_auth_ouput(): array
+    public function answers(): EmbedsMany
+    {
+        return $this->embedsMany(Answer::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function checklist(): EmbedsMany {
+        return $this->embedsMany(ChecklistItem::class);
+    }
+
+    public function to_public_output(): array
     {
         $output = [
-            'application_id' => $this->application_id
+            'application_id' => $this->_id,
+            'status' => $this->status,
+            'answers' => $this->answers->mapWithKeys(function (Answer $answer) {
+                return [$answer->question->_id => $answer->answer];
+            }),
+            'checklist' => $this->checklist->map(function($item) {
+                return $item->to_public_output();
+            })
         ];
 
         return $output;
