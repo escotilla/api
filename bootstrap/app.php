@@ -50,6 +50,15 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+
+$app->singleton(Illuminate\Contracts\Filesystem\Factory::class, function ($app) {
+    return new \Illuminate\Filesystem\FilesystemManager($app);
+});
+
+$app->singleton('filesystem', function ($app) {
+    return $app->loadComponent('filesystems', 'Illuminate\Filesystem\FilesystemServiceProvider', 'filesystem');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -100,6 +109,7 @@ $app->routeMiddleware([
 */
 
 $app->configure('database');
+$app->configure('filesystems');
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
