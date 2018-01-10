@@ -26,4 +26,5 @@ $router->group(['middleware' => 'json'], function () use ($router) {
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/document/create', 'DocumentController@upload');
+    $router->post('/document/read', 'DocumentController@download');
 });

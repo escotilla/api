@@ -38,6 +38,7 @@ class UploadedFile extends Eloquent
     public function to_public_output(): array
     {
         $output = [
+            'uploaded_file_id' => $this->_id,
             'file_name' => $this->file_name,
             'original_file_name' => $this->original_file_name,
             'size' => $this->size
