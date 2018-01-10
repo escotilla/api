@@ -2,7 +2,6 @@
 
 namespace App;
 
-use function foo\func;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Jenssegers\Mongodb\Relations\EmbedsMany;
 use Jenssegers\Mongodb\Relations\EmbedsOne;
@@ -58,14 +57,22 @@ class User extends Eloquent
         return $this->embedsOne(Business::class);
     }
 
+    public function uploaded_files(): HasMany
+    {
+        return $this->hasMany(UploadedFile::class);
+    }
+
     public function to_auth_output(): array
     {
         $output = [
             'email' => $this->email,
             'api_token' => $this->api_token,
             'user_id' => $this->_id,
-            'application_ids' => $this->applications->map(function($application) {
+            'application_ids' => $this->applications->map(function(Application $application) {
                 return $application->_id;
+            }),
+            'uploaded_files' => $this->uploaded_files->map(function(UploadedFile $file) {
+                return $file->to_public_output();
             })
         ];
 

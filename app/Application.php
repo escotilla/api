@@ -5,6 +5,7 @@ namespace App;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Jenssegers\Mongodb\Relations\BelongsTo;
 use Jenssegers\Mongodb\Relations\EmbedsMany;
+use Jenssegers\Mongodb\Relations\HasMany;
 
 /**
  * Class Application
@@ -36,7 +37,8 @@ class Application extends Eloquent
         return $this->belongsTo(User::class);
     }
 
-    public function checklist(): EmbedsMany {
+    public function checklist(): EmbedsMany
+    {
         return $this->embedsMany(ChecklistItem::class);
     }
 

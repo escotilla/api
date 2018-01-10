@@ -23,3 +23,7 @@ $router->group(['middleware' => 'json'], function () use ($router) {
     $router->post('/application/create', 'ApplicationController@create');
     $router->post('/application/read', 'ApplicationController@get');
 });
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->post('/document/create', 'DocumentController@upload');
+});
