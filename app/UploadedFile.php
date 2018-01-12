@@ -2,19 +2,14 @@
 
 namespace App;
 
-use function foo\func;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Jenssegers\Mongodb\Relations\BelongsTo;
-use Jenssegers\Mongodb\Relations\BelongsToMany;
-use Jenssegers\Mongodb\Relations\EmbedsMany;
-use Jenssegers\Mongodb\Relations\EmbedsOne;
-use Jenssegers\Mongodb\Relations\HasMany;
 
 /**
  * Class UploadedFile
  * @package App
  * @property string file_name
  * @property string original_file_name
+ * @property string mime_type
  * @property int size
  */
 class UploadedFile extends Eloquent
@@ -27,13 +22,9 @@ class UploadedFile extends Eloquent
     protected $fillable = [
         'file_name',
         'original_file_name',
-        'size'
+        'size',
+        'mime_type'
     ];
-
-    public function applications(): BelongsToMany
-    {
-        return $this->belongsToMany(Application::class);
-    }
 
     public function to_public_output(): array
     {
@@ -41,7 +32,8 @@ class UploadedFile extends Eloquent
             'uploaded_file_id' => $this->_id,
             'file_name' => $this->file_name,
             'original_file_name' => $this->original_file_name,
-            'size' => $this->size
+            'size' => $this->size,
+            'mime_type' => $this->mime_type
         ];
 
         return $output;

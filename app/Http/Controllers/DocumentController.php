@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Application;
 use App\UploadedFile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -19,18 +19,12 @@ class DocumentController extends EscotillaController
         ]);
 
         $user = Auth::user();
-        $application = Application::find($request->get('application_id'));
-
-        if (is_null($application)) {
-            return $this->errorResponse('application not found', Response::HTTP_NOT_FOUND);
-        }
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
 
             try {
-                $uploadedFile = $this->saveFileToS3($file, $application);
-                $user->uploaded_files()->save($uploadedFile);
+                $this->saveFileToS3($user, $file);
             } catch (\Exception $error) {
                 return $this->errorResponse($error->getMessage(), Response::HTTP_BAD_REQUEST);
             }
@@ -52,6 +46,10 @@ class DocumentController extends EscotillaController
         try {
             if (Storage::disk('s3')->has($user->_id . '/' . $uploadedFile->file_name)) {
                 $file = Storage::disk('s3')->get($user->_id . '/' . $uploadedFile->file_name);
+                $temp = tempnam(sys_get_temp_dir(), $uploadedFile->file_name);
+                $handle = fopen($temp, "w");
+                fwrite($handle, $file);
+                fclose($handle);
             } else {
                 return $this->errorResponse('File not found', Response::HTTP_NOT_FOUND);
             }
@@ -60,15 +58,16 @@ class DocumentController extends EscotillaController
             return $this->errorResponse($error->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        return response()->download($file);
+        $headers = [
+            'Content-Type' => $uploadedFile->mime_type
+        ];
+
+        return response()
+            ->download($temp, $uploadedFile->original_file_name, $headers)
+            ->deleteFileAfterSend(true);
     }
 
-    /**
-     * @param $file
-     * @param $application
-     * @return UploadedFile
-     */
-    public function saveFileToS3($file, $application): UploadedFile
+    public function saveFileToS3(User $user, $file): UploadedFile
     {
         $originalFileName = $file->getClientOriginalName();
         $fileSize = $file->getClientSize();
@@ -76,15 +75,17 @@ class DocumentController extends EscotillaController
         $fileExtension = $file->getClientOriginalExtension();
         $savedFileName = uniqid('file-') . '.' . $fileExtension;
 
-        Storage::disk('s3')->putFileAs($application->user_id, $file, $savedFileName);
+        Storage::disk('s3')->putFileAs($user->_id, $file, $savedFileName);
 
         $uploadedFile = new UploadedFile([
             'original_file_name' => $originalFileName,
             'file_name' => $savedFileName,
-            'size' => $fileSize
+            'size' => $fileSize,
+            'mime_type' => $file->getClientMimeType()
         ]);
 
-        $uploadedFile->applications()->save($application);
+        $user->uploaded_files()->save($uploadedFile);
+
         return $uploadedFile;
     }
 }
