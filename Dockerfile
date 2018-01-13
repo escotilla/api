@@ -19,8 +19,7 @@ RUN composer install --no-interaction
 WORKDIR /var/www/html
 RUN chown -R www-data /var/www/html
 
-RUN chmod -R 777 /var/www/html/storage/
-RUN chmod -Rf 777 /var/www/html/storage/logs/
+RUN chmod -R 777 'storage'
 
 CMD ["php-fpm"]
 EXPOSE 9000
