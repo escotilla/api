@@ -14,6 +14,7 @@ ADD images/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 RUN usermod -u 1000 www-data
 
 COPY . /var/www/html
+COPY .env /var/www/html
 RUN composer install --no-interaction
 
 WORKDIR /var/www/html
