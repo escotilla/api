@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": 2,
   "authentication": {
-    "bucket": "elasticbeanstalk-us-east-1-109729136134",
+    "bucket": "escotilladocuments",
     "key": "config.json"
   },
   "volumes": [
