@@ -35,7 +35,7 @@
     },
     {
       "name": "php",
-      "image": "109729136134.dkr.ecr.us-east-1.amazonaws.com/escotilla",
+      "image": "109729136134.dkr.ecr.us-east-1.amazonaws.com/escotilla:latest",
       "essential": true,
       "memory": 128,
       "mountPoints": [
