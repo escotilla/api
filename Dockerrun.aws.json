@@ -16,24 +16,6 @@
   ],
   "containerDefinitions": [
     {
-      "name": "mongo",
-      "image": "mongo",
-      "essential": true,
-      "memory": 128,
-      "portMappings": [
-        {
-          "hostPort": 27017,
-          "containerPort": 27017
-        }
-      ],
-      "environment": [
-        {
-          "name": "MONGO_DATA_DIR",
-          "value": "/data/db"
-        }
-      ]
-    },
-    {
       "name": "php",
       "image": "109729136134.dkr.ecr.us-east-1.amazonaws.com/escotilla:latest",
       "essential": true,
@@ -44,9 +26,6 @@
           "containerPath": "/var/www/html",
           "readOnly": true
         }
-      ],
-      "links": [
-        "mongo:mongo"
       ]
     },
     {
@@ -61,8 +40,7 @@
         }
       ],
       "links": [
-        "php",
-        "mongo"
+        "php"
       ],
       "mountPoints": [
         {
