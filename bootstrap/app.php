@@ -108,12 +108,7 @@ $app->routeMiddleware([
 |
 */
 
-if (app()->environment('local')) {
-    $app->configure('local_database');
-} else {
-    $app->configure('database');
-}
-
+$app->configure('database');
 $app->configure('filesystems');
 
 $app->router->group([
