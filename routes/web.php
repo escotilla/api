@@ -28,3 +28,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/document/create', 'DocumentController@upload');
     $router->post('/document/read', 'DocumentController@download');
 });
+
+$router->group(['middleware' => ['auth', 'admin']], function () use ($router) {
+    $router->post('/user/read', 'UserController@read');
+});
