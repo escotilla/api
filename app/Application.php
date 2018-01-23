@@ -32,11 +32,6 @@ class Application extends Eloquent
         return $this->embedsMany(Answer::class);
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function checklist(): EmbedsMany
     {
         return $this->embedsMany(ChecklistItem::class);

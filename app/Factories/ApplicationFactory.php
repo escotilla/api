@@ -27,9 +27,10 @@ class ApplicationFactory
                 $answer->save();
 
                 $application->answers()->associate($answer);
-                $application->user()->associate($user);
                 $application->save();
 
+                $user->applications()->associate($application);
+                $user->save();
             }
         }
 
