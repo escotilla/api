@@ -3,6 +3,7 @@
 namespace App;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Jenssegers\Mongodb\Relations\BelongsTo;
 use Jenssegers\Mongodb\Relations\EmbedsMany;
 use Jenssegers\Mongodb\Relations\EmbedsOne;
 use Jenssegers\Mongodb\Relations\HasMany;
@@ -30,7 +31,8 @@ class User extends Eloquent
         'api_token',
         'login_attempts',
         'password',
-        'dob'
+        'dob',
+        'name'
     ];
 
     /**
@@ -42,14 +44,9 @@ class User extends Eloquent
         'password',
     ];
 
-    public function applications(): HasMany
+    public function applications(): EmbedsMany
     {
-        return $this->hasMany(Application::class);
-    }
-
-    public function answers(): EmbedsMany
-    {
-        return $this->embedsMany(Answer::class);
+        return $this->embedsMany(Application::class);
     }
 
     public function business(): EmbedsOne
@@ -62,16 +59,26 @@ class User extends Eloquent
         return $this->hasMany(UploadedFile::class);
     }
 
+    public function role(): BelongsTo
+    {
+        return $this->BelongsTo(Role::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->name === 'admin';
+    }
+
     public function to_auth_output(): array
     {
         $output = [
             'email' => $this->email,
             'api_token' => $this->api_token,
             'user_id' => $this->_id,
-            'application_ids' => $this->applications->map(function(Application $application) {
-                return $application->_id;
+            'applications' => $this->applications->map(function (Application $application) {
+                return $application->to_public_output();
             }),
-            'uploaded_files' => $this->uploaded_files->map(function(UploadedFile $file) {
+            'uploaded_files' => $this->uploaded_files->map(function (UploadedFile $file) {
                 return $file->to_public_output();
             })
         ];
@@ -81,7 +88,7 @@ class User extends Eloquent
 
     public function to_application_output()
     {
-        return $this->applications->map(function($application) {
+        return $this->applications->map(function ($application) {
             return $application->to_public_output();
         });
     }
