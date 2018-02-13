@@ -1,7 +1,7 @@
 FROM php:7.1-fpm
 
 RUN apt-get update && apt-get install -y \
-    zip unzip git libmcrypt-dev libcurl4-openssl-dev pkg-config libssl-dev \
+    zip unzip git libmcrypt-dev libcurl4-openssl-dev pkg-config libssl-dev php-curl \
         && docker-php-ext-install mbstring \
         && pecl install mongodb \
         && docker-php-ext-enable mongodb \
