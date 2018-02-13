@@ -10,11 +10,7 @@ use Jenssegers\Mongodb\Relations\HasOne;
 /**
  * Class Answer
  * @package App
- * @property string short_question
- * @property string english
- * @property string spanish
- * @property string category
- * @property string answer_type
+ * @property string answer
  */
 class Answer extends Eloquent
 {
@@ -24,7 +20,7 @@ class Answer extends Eloquent
      * @var array
      */
     protected $fillable = [
-        'answer'
+        'answer',
     ];
 
     public function question(): EmbedsOne
