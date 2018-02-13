@@ -44,9 +44,9 @@ class User extends Eloquent
         'password',
     ];
 
-    public function applications(): EmbedsMany
+    public function applications(): HasMany
     {
-        return $this->embedsMany(Application::class);
+        return $this->hasMany(Application::class);
     }
 
     public function business(): EmbedsOne
@@ -59,6 +59,11 @@ class User extends Eloquent
         return $this->hasMany(UploadedFile::class);
     }
 
+    public function loans(): HasMany
+    {
+        return $this->hasMany(Loan::class);
+    }
+
     public function role(): BelongsTo
     {
         return $this->BelongsTo(Role::class);
@@ -69,18 +74,29 @@ class User extends Eloquent
         return $this->role->name === 'admin';
     }
 
+    public function payments(): HasMany
+    {
+        return $this->hasMany(LoanPayment::class);
+    }
+
     public function to_auth_output(): array
     {
+        $loans = is_null($this->loans) ? [] : $this->loans->map(function(Loan $loan) {
+          return $loan->to_public_output();
+        });
+
         $output = [
             'email' => $this->email,
             'api_token' => $this->api_token,
-            'user_id' => $this->_id,
+            'id' => $this->_id,
             'applications' => $this->applications->map(function (Application $application) {
                 return $application->to_public_output();
             }),
             'uploaded_files' => $this->uploaded_files->map(function (UploadedFile $file) {
                 return $file->to_public_output();
-            })
+            }),
+            'loans' => $loans
+
         ];
 
         return $output;

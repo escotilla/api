@@ -9,7 +9,8 @@
         "laravel/lumen-framework": "5.5.*",
         "vlucas/phpdotenv": "~2.2",
         "jenssegers/mongodb": "^3.3",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "paypal/rest-api-sdk-php": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
