@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application;
 use App\UploadedFile;
 use App\User;
 use Illuminate\Http\Request;
@@ -28,6 +29,12 @@ class DocumentController extends EscotillaController
             } catch (\Exception $error) {
                 return $this->errorResponse($error->getMessage(), Response::HTTP_BAD_REQUEST);
             }
+        }
+
+        $application = Application::find($request->get('application_id'));
+
+        if (!is_null($application)) {
+            $application->updateChecklist('upload_documents', 'complete');
         }
 
         return $this->successResponse($user->to_auth_output());
