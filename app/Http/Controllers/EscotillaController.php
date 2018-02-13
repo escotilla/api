@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class EscotillaController extends Controller
 {
-    protected function successResponse($data)
+    protected function successResponse($data = [])
     {
         return response()->json([
             'success' => true,
