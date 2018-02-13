@@ -43,5 +43,41 @@
         "category": "loan",
         "answer_type": "int",
         "attribute": null
+    },
+    {
+        "question_id": "5a7e03f9921ef3001409e162",
+        "short_question": "full_name",
+        "english": "Full name",
+        "spanish": "Nombre",
+        "category": "personal",
+        "answer_type": "string",
+        "attribute": null
+    },
+    {
+        "question_id": "5a7e03f9921ef3001409e163",
+        "short_question": "email",
+        "english": "Email (this will be your username)",
+        "spanish": "Email (this will be your username)",
+        "category": "personal",
+        "answer_type": "email",
+        "attribute": null
+    },
+    {
+        "question_id": "5a7e03f9921ef3001409e164",
+        "short_question": "accurate_info",
+        "english": "I have reviewed all my info for accuracy",
+        "spanish": "I have reviewed todo mi info for accuracy",
+        "category": "loan",
+        "answer_type": "boolean",
+        "attribute": null
+    },
+    {
+        "question_id": "5a7e670b921ef3001c00ace2",
+        "short_question": "agree_loan_contract",
+        "english": "I agree to the terms and conditions",
+        "spanish": "I agree to the terms and conditions",
+        "category": "loan",
+        "answer_type": "boolean",
+        "attribute": null
     }
 ]
