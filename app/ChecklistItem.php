@@ -24,6 +24,14 @@ class ChecklistItem extends Eloquent
         'title'
     ];
 
+    public function setStatus($status) {
+        return $this->status = $status;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
     public function to_public_output(): array
     {
         $output = [
