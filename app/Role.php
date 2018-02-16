@@ -46,4 +46,8 @@ class Role extends Eloquent
     {
         $this->permissions()->save($permission);
     }
+
+    public function getName() {
+        return $this->name;
+    }
 }

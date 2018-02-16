@@ -95,8 +95,8 @@ class User extends Eloquent
             'uploaded_files' => $this->uploaded_files->map(function (UploadedFile $file) {
                 return $file->to_public_output();
             }),
-            'loans' => $loans
-
+            'loans' => $loans,
+            'role' => $this->role->getName()
         ];
 
         return $output;

@@ -67,12 +67,11 @@ class UserController extends EscotillaController
 
             if (is_null($userId)) {
                 $limit = 25;
-                $projection = ['id', 'email', 'username', 'name', 'applications.status'];
-                $users = DB::collection('users')
-                    ->where('role_id', $applicant->_id)
+                $projection = ['id', 'email', 'name', 'checklist.status', 'created_at'];
+                $applications = DB::collection('applications')
                     ->paginate($limit, $projection);
 
-                return $this->successResponse($users);
+                return $this->successResponse($applications);
             }
 
             $user = User::find($userId);
