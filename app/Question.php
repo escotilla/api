@@ -9,11 +9,9 @@ use Jenssegers\Mongodb\Relations\HasMany;
  * Class Question
  * @package App
  * @property string short_question
- * @property string english
- * @property string spanish
+ * @property string input_type
  * @property string category
  * @property string answer_type
- * @property string attribute
  */
 class Question extends Eloquent
 {
@@ -28,6 +26,7 @@ class Question extends Eloquent
     const DOB = '5a501d0ebfaf57001c265b23';
     const FULL_NAME = '5a7e03f9921ef3001409e162';
     const EMAIL = '5a7e03f9921ef3001409e163';
+    const PASSWORD = '5a86577f921ef3000f56b0a2';
 
     /**
      * The attributes that are mass assignable.
@@ -36,11 +35,9 @@ class Question extends Eloquent
      */
     protected $fillable = [
         'short_question',
-        'english',
-        'spanish',
         'category',
         'answer_type',
-        'attribute'
+        'input_type'
     ];
 
     public function to_public_output(): array
@@ -48,11 +45,9 @@ class Question extends Eloquent
         $output = [
             'question_id' => $this->_id,
             'short_question' => $this->short_question,
-            'english' => $this->english,
-            'spanish' => $this->spanish,
+            'input_type' => $this->input_type,
             'category' => $this->category,
             'answer_type' => $this->answer_type,
-            'attribute' => $this->attribute,
         ];
 
         return $output;

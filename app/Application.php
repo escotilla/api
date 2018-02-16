@@ -12,6 +12,8 @@ use Jenssegers\Mongodb\Relations\HasOne;
  * Class Application
  * @package App
  * @property string status
+ * @property string name
+ * @property string email
  */
 class Application extends Eloquent
 {
@@ -25,7 +27,9 @@ class Application extends Eloquent
         'term',
         'frequency',
         'amount',
-        'status'
+        'status',
+        'name',
+        'email'
     ];
 
     public function updateChecklist($type, $status = 'complete') {

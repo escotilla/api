@@ -19,6 +19,8 @@ class ApplicationFactory
             'upload_documents',
             'sign_agreement'
         ]);
+        $application->name = $user->name;
+        $application->email = $user->email;
         $application->save();
 
         foreach ($payload as $question_id => $value) {

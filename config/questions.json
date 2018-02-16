@@ -2,82 +2,71 @@
     {
         "question_id": "5a501d0ebfaf57001c265b22",
         "short_question": "business_description",
-        "english": "Please describe your business",
-        "spanish": "Describe your business por favor",
+        "input_type": "text",
         "category": "business",
-        "answer_type": "string",
-        "attribute": null
+        "answer_type": "string"
     },
     {
         "question_id": "5a501d0ebfaf57001c265b23",
         "short_question": "dob",
-        "english": "What's your date of birth?",
-        "spanish": "DOB?",
+        "input_type": "date",
         "category": "personal",
-        "answer_type": "date",
-        "attribute": null
+        "answer_type": "date"
     },
     {
         "question_id": "5a5287a5bfaf57008c058792",
         "short_question": "business_product",
-        "english": "What product or service do you sell?",
-        "spanish": "What product or service do you sell?",
+        "input_type": "text",
         "category": "business",
-        "answer_type": "string",
-        "attribute": null
+        "answer_type": "string"
     },
     {
         "question_id": "5a5287a5bfaf57008c058793",
         "short_question": "business_name",
-        "english": "Business name",
-        "spanish": "Business name",
+        "input_type": "text",
         "category": "business",
-        "answer_type": "string",
-        "attribute": null
+        "answer_type": "string"
     },
     {
         "question_id": "5a54031fbfaf5700a0017672",
         "short_question": "loan_amount",
-        "english": "Loan amount",
-        "spanish": "Loan amount",
+        "input_type": "string",
         "category": "loan",
-        "answer_type": "int",
-        "attribute": null
+        "answer_type": "int"
     },
     {
         "question_id": "5a7e03f9921ef3001409e162",
         "short_question": "full_name",
-        "english": "Full name",
-        "spanish": "Nombre",
+        "input_type": "text",
         "category": "personal",
-        "answer_type": "string",
-        "attribute": null
+        "answer_type": "string"
     },
     {
         "question_id": "5a7e03f9921ef3001409e163",
         "short_question": "email",
-        "english": "Email (this will be your username)",
-        "spanish": "Email (this will be your username)",
+        "input_type": "email",
         "category": "personal",
-        "answer_type": "email",
-        "attribute": null
+        "answer_type": "email"
     },
     {
         "question_id": "5a7e03f9921ef3001409e164",
         "short_question": "accurate_info",
-        "english": "I have reviewed all my info for accuracy",
-        "spanish": "I have reviewed todo mi info for accuracy",
+        "input_type": "checkbox",
         "category": "loan",
-        "answer_type": "boolean",
-        "attribute": null
+        "answer_type": "boolean"
     },
     {
         "question_id": "5a7e670b921ef3001c00ace2",
         "short_question": "agree_loan_contract",
-        "english": "I agree to the terms and conditions",
-        "spanish": "I agree to the terms and conditions",
+        "input_type": "checkbox",
         "category": "loan",
-        "answer_type": "boolean",
-        "attribute": null
+        "answer_type": "boolean"
+    },
+    {
+        "question_id": "5a86577f921ef3000f56b0a2",
+        "short_question": "password",
+        "input_type": "password",
+        "category": "personal",
+        "answer_type": "password"
     }
 ]

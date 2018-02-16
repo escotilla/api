@@ -21,7 +21,8 @@ class BootstrapQuestionsCommand extends Command
                 $newQuestion = new Question($question);
                 $newQuestion->save();
                 $this->output->writeln('Saved new question: ' . $newQuestion->short_question);
-            } elseif (is_null(Question::find($question['question_id']))) {
+            } else {
+                Question::destroy($question['question_id']);
                 $newQuestion = new Question($question);
                 $newQuestion->_id = new ObjectID($question['question_id']);
                 $newQuestion->save();
