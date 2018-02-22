@@ -41,11 +41,11 @@ class UserController extends EscotillaController
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            Question::EMAIL => 'required|email',
             'password' => 'required'
         ]);
 
-        $email = $request->input('email');
+        $email = $request->input(Question::EMAIL);
         $password = $request->input('password');
 
         $user = User::where('email', $email)->first();
